@@ -25,29 +25,29 @@ function ob1_pagination($atts)
 	$numberOfTabs = (empty($thispage)) ? 1: $numPages;
 
 	extract(lAtts(array(
-		"maximumtabs"=>"11", # maximum number of tabs displayed
-		"firsttext"=>"&#171;",
-		"firsttexttitle"=>"First",
-		"previoustext"=>"&#8249;",
-		"previoustexttitle"=>"Previous",
-		"lasttext"=>"&#187;",
-		"lasttexttitle"=>"Last",
-		"nexttext"=>"&#8250;",
-		"nexttexttitle"=>"Next",
-		"pagetext"=>"Page",
-		"ulid"=>'',
-		"ulclass"=>'',
-		"liclass"=>'', # default class, added to every <li>
-		"liselected"=>'', # selected class, added to the current tab
-		"liselectedtext"=>'', # if you want the selected <li> to contain something else then the number, add it here
-		"liempty"=>'', # empty class, added to the <li> that do not hold an anchor <a>
-		"linkcurrent"=>"0",
-		"outputlastfirst"=>"1",
-		"outputnextprevious"=>"1",
-		"reversenumberorder"=>"0", # want the numbers reversed? no sweat. change to 1
-		"moretabsdisplay"=>"", # may contain before or after or both if they're comma-separated
-		"moretabstext"=>"...",
-		"wraptag"=>"",
+		'maximumtabs'=>'11', # maximum number of tabs displayed
+		'firsttext'=>'&#171;',
+		'firsttexttitle'=>'First',
+		'previoustext'=>'&#8249;',
+		'previoustexttitle'=>'Previous',
+		'lasttext'=>'&#187;',
+		'lasttexttitle'=>'Last',
+		'nexttext'=>'&#8250;',
+		'nexttexttitle'=>'Next',
+		'pagetext'=>'Page',
+		'ulid'=>'',
+		'ulclass'=>'',
+		'liclass'=>'', # default class, added to every <li>
+		'liselected'=>'', # selected class, added to the current tab
+		'liselectedtext'=>'', # if you want the selected <li> to contain something else then the number, add it here
+		'liempty'=>'', # empty class, added to the <li> that do not hold an anchor <a>
+		'linkcurrent'=>'0',
+		'outputlastfirst'=>'1',
+		'outputnextprevious'=>'1',
+		'reversenumberorder'=>'0', # want the numbers reversed? no sweat. change to 1
+		'moretabsdisplay'=>'', # may contain before or after or both if they're comma-separated
+		'moretabstext'=>'...',
+		'wraptag'=>'',
 	),$atts));
 
 	$ulid=(empty($ulid))?'':' id="'.$ulid.'"';
@@ -106,18 +106,18 @@ function ob1_pagination($atts)
 		$out=array();
 		if($pg>1)
 			{
-			$out[] = ($outputlastfirst) ? "<li class='$liclass'><a href='?pg=1$addToURL' title='".$firsttexttitle."'>".$firsttext."</a></li>".n : "";
-			$out[] = ($outputnextprevious) ? "<li class='$liclass'><a href='?pg=".($pg-1)."$addToURL' title='".$previoustexttitle."'>".$previoustext."</a></li>".n : "";
+			$out[] = ($outputlastfirst) ? "<li class='$liclass'><a href='?pg=1$addToURL' title='".$firsttexttitle."'>".$firsttext.'</a></li>'.n : '';
+			$out[] = ($outputnextprevious) ? "<li class='$liclass'><a href='?pg=".($pg-1)."$addToURL' title='".$previoustexttitle."'>".$previoustext.'</a></li>'.n : '';
 			}
 		else
 			{
-			$out[] = ($outputlastfirst) ? "<li class='$liempty $liclass'>".$firsttext."</li>".n : "";
-			$out[] = ($outputnextprevious) ? "<li class='$liempty $liclass'>".$previoustext."</li>".n : "";
+			$out[] = ($outputlastfirst) ? "<li class='$liempty $liclass'>".$firsttext.'</li>'.n : '';
+			$out[] = ($outputnextprevious) ? "<li class='$liempty $liclass'>".$previoustext.'</li>'.n : '';
 			}
 
-		if(in_list("before",$moretabsdisplay) and $loopStart>1)
+		if(in_list('before',$moretabsdisplay) and $loopStart>1)
 			{
-			$out[] = "<li class='$liclass $liempty'>".$moretabstext."</li>";
+			$out[] = "<li class='$liclass $liempty'>".$moretabstext.'</li>';
 			}
 
 		for($i=$loopStart;$i<$loopEnd;$i++)
@@ -126,7 +126,7 @@ function ob1_pagination($atts)
 				{
 				$out[] = "<li class='$liselected $liclass";
 				$out[] = ($linkcurrent) ? "'>" : " $liempty'>";
-				$out[] = ($linkcurrent) ? "<a href='?pg=".$i."$addToURL' title='".$pagetext : "";
+				$out[] = ($linkcurrent) ? "<a href='?pg=".$i."$addToURL' title='".$pagetext : '';
 				if($reversenumberorder)
 					{
 					$out[] = ($linkcurrent) ? " ".($numberOfTabs-$i+1)."'>" : '';
@@ -137,33 +137,33 @@ function ob1_pagination($atts)
 					$out[] = ($linkcurrent) ? " ".$i."'>" : '';
 					$out[] = ($liselectedtext) ? $liselectedtext : $i;
 					}
-				$out[] = ($linkcurrent) ? "</a>" : "";
-				$out[] = "</li>".n;
+				$out[] = ($linkcurrent) ? '</a>' : '';
+				$out[] = '</li>'.n;
 				}
 			else
 				{
 				$out[] = "<li class='$liclass'><a href='?pg=".$i."$addToURL' title='".$pagetext;
-				$out[] = ($reversenumberorder) ? " ".($numberOfTabs-$i+1)."'>".($numberOfTabs-$i+1) : " ".$i."'>".$i ;
-				$out[] = "</a></li>".n;
+				$out[] = ($reversenumberorder) ? " ".($numberOfTabs-$i+1)."'>".($numberOfTabs-$i+1) : ' '.$i."'>".$i ;
+				$out[] = '</a></li>'.n;
 				}
 			}
 
-		if(in_list("after",$moretabsdisplay) and $loopEnd<=$numberOfTabs)
+		if(in_list('after',$moretabsdisplay) and $loopEnd<=$numberOfTabs)
 			{
-			$out[] = "<li class='$liclass $liempty'>".$moretabstext."</li>";
+			$out[] = "<li class='$liclass $liempty'>".$moretabstext.'</li>';
 			}
 
 		if($pg==$numberOfTabs)
 			{
-			$out[] = ($outputnextprevious) ? "<li class='$liempty $liclass'>".$nexttext."</li>".n : "";
-			$out[] = ($outputlastfirst) ? "<li class='$liempty $liclass'>".$lasttext."</li>".n : "";
+			$out[] = ($outputnextprevious) ? "<li class='$liempty $liclass'>".$nexttext.'</li>'.n : '';
+			$out[] = ($outputlastfirst) ? "<li class='$liempty $liclass'>".$lasttext.'</li>'.n : '';
 			}
 		else
 			{
-			$out[] = ($outputnextprevious) ? "<li class='$liclass'><a href='?pg=".($pg+1)."$addToURL' title='".$nexttexttitle."'>".$nexttext."</a></li>".n : "";
-			$out[] = ($outputlastfirst) ? "<li class='$liclass'><a href='?pg=".$numberOfTabs."$addToURL' title='".$lasttexttitle."'>".$lasttext."</a></li>".n : "";
+			$out[] = ($outputnextprevious) ? "<li class='$liclass'><a href='?pg=".($pg+1)."$addToURL' title='".$nexttexttitle."'>".$nexttext.'</a></li>'.n : '';
+			$out[] = ($outputlastfirst) ? "<li class='$liclass'><a href='?pg=".$numberOfTabs."$addToURL' title='".$lasttexttitle."'>".$lasttext.'</a></li>'.n : '';
 			}
-		return ($wraptag) ? tag("<ul".$ulclass.$ulid.">".n.join("", $out)."</ul>",$wraptag) : "<ul".$ulclass.$ulid.">".n.join("", $out)."</ul>";
+		return ($wraptag) ? tag('<ul'.$ulclass.$ulid.'>'.n.join('', $out).'</ul>',$wraptag) : '<ul'.$ulclass.$ulid.'>'.n.join('', $out).'</ul>';
 		}
 	else
 		{
