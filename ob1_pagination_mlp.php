@@ -50,11 +50,11 @@ function ob1_pagination($atts)
 		'wraptag'=>'',
 	),$atts));
 
-	$ulid=(empty($ulid))?'':' id="'.$ulid.'"';
-	$ulclass=(empty($ulclass))?'':' class="'.$ulclass.'"';
+	$ulid=(empty($ulid)) ? '' : ' id="'.$ulid.'"';
+	$ulclass=(empty($ulclass))? '' : ' class="'.$ulclass.'"';
 
-	$addToURL = ($permlink_mode=='messy') ? "&amp;s=$s" : "" ;
-	$addToURL .= ($c) ? "&amp;c=$c" : "";
+	$addToURL = ($permlink_mode=='messy') ? '&amp;s='.$s : '' ;
+	$addToURL .= ($c) ? '&amp;c='.$c : '';
 
 	# if we got tabs, start the outputting
 	if($numberOfTabs>1)
@@ -68,14 +68,14 @@ function ob1_pagination($atts)
 			$ob1ASGet = array('rpp','wh','ww','oc','ad','sd','ed','bts');
 			foreach($ob1ASGet as $val) 
 				{
-				$$val = (!empty($_GET[$val])) ? "&amp;$val=".urlencode($_GET[$val]) : '';
+				$$val = (!empty($_GET[$val])) ? '&amp;'.$val.'='.urlencode($_GET[$val]) : '';
 				}
-			$addToURL .= "&amp;q=".urlencode($q).$rpp.$wh.$ww.$oc.$ad.$sd.$ed.$bts;
+			$addToURL .= '&amp;q='.urlencode($q).$rpp.$wh.$ww.$oc.$ad.$sd.$ed.$bts;
 			unset($ob1ASGet,$rpp,$wh,$ww,$oc,$ad,$sd,$ed,$bts);
 			}
 		elseif($q)
 			{
-			$addToURL .= "&amp;q=".urlencode($q);
+			$addToURL .= '&amp;q='.urlencode($q);
 			}
 
 		if($numberOfTabs>$maximumtabs)
@@ -106,35 +106,35 @@ function ob1_pagination($atts)
 		$out=array();
 		if($pg>1)
 			{
-			$out[] = ($outputlastfirst) ? "<li class='$liclass'><a href='?pg=1$addToURL' title='".$firsttexttitle."'>".$firsttext.'</a></li>'.n : '';
-			$out[] = ($outputnextprevious) ? "<li class='$liclass'><a href='?pg=".($pg-1)."$addToURL' title='".$previoustexttitle."'>".$previoustext.'</a></li>'.n : '';
+			$out[] = ($outputlastfirst) ?    '<li class="'.$liclass.'"><a href="?pg=1'.       $addToURL.' title="'.$firsttexttitle.   '">'.$firsttext.   '</a></li>'.n : '';
+			$out[] = ($outputnextprevious) ? '<li class="'.$liclass.'"><a href="?pg='.($pg-1).$addToURL.' title="'.$previoustexttitle.'">'.$previoustext.'</a></li>'.n : '';
 			}
 		else
 			{
-			$out[] = ($outputlastfirst) ? "<li class='$liempty $liclass'>".$firsttext.'</li>'.n : '';
-			$out[] = ($outputnextprevious) ? "<li class='$liempty $liclass'>".$previoustext.'</li>'.n : '';
+			$out[] = ($outputlastfirst) ?    '<li class="'.$liempty.' '.$liclass.'">'.$firsttext.   '</li>'.n : '';
+			$out[] = ($outputnextprevious) ? '<li class="'.$liempty.' '.$liclass.'">'.$previoustext.'</li>'.n : '';
 			}
 
 		if(in_list('before',$moretabsdisplay) and $loopStart>1)
 			{
-			$out[] = "<li class='$liclass $liempty'>".$moretabstext.'</li>';
+			$out[] = '<li class="'.$liclass.' '.$liempty.'">'.$moretabstext.'</li>';
 			}
 
 		for($i=$loopStart;$i<$loopEnd;$i++)
 			{
 			if($i==$pg)
 				{
-				$out[] = "<li class='$liselected $liclass";
-				$out[] = ($linkcurrent) ? "'>" : " $liempty'>";
-				$out[] = ($linkcurrent) ? "<a href='?pg=".$i."$addToURL' title='".$pagetext : '';
+				$out[] = '<li class="'.$liselected.' '.$liclass;
+				$out[] = ($linkcurrent) ? '">' : ' '.$liempty.'">';
+				$out[] = ($linkcurrent) ? '<a href="?pg='.$i.$addToURL.'" title="'.$pagetext : '';
 				if($reversenumberorder)
 					{
-					$out[] = ($linkcurrent) ? " ".($numberOfTabs-$i+1)."'>" : '';
+					$out[] = ($linkcurrent) ? ' '.($numberOfTabs-$i+1).'">' : '';
 					$out[] = ($liselectedtext) ? $liselectedtext : ($numberOfTabs-$i+1);
 					}
 				else
 					{
-					$out[] = ($linkcurrent) ? " ".$i."'>" : '';
+					$out[] = ($linkcurrent) ? ' '.$i.'">' : '';
 					$out[] = ($liselectedtext) ? $liselectedtext : $i;
 					}
 				$out[] = ($linkcurrent) ? '</a>' : '';
@@ -142,26 +142,26 @@ function ob1_pagination($atts)
 				}
 			else
 				{
-				$out[] = "<li class='$liclass'><a href='?pg=".$i."$addToURL' title='".$pagetext;
-				$out[] = ($reversenumberorder) ? " ".($numberOfTabs-$i+1)."'>".($numberOfTabs-$i+1) : ' '.$i."'>".$i ;
+				$out[] = '<li class="'.$liclass.'"><a href="?pg='.$i.$addToURL.' title="'.$pagetext;
+				$out[] = ($reversenumberorder) ? ' '.($numberOfTabs-$i+1).'">'.($numberOfTabs-$i+1) : ' '.$i.'">'.$i;
 				$out[] = '</a></li>'.n;
 				}
 			}
 
 		if(in_list('after',$moretabsdisplay) and $loopEnd<=$numberOfTabs)
 			{
-			$out[] = "<li class='$liclass $liempty'>".$moretabstext.'</li>';
+			$out[] = '<li class="'.$liclass.' '.$liempty.'">'.$moretabstext.'</li>';
 			}
 
 		if($pg==$numberOfTabs)
 			{
-			$out[] = ($outputnextprevious) ? "<li class='$liempty $liclass'>".$nexttext.'</li>'.n : '';
-			$out[] = ($outputlastfirst) ? "<li class='$liempty $liclass'>".$lasttext.'</li>'.n : '';
+			$out[] = ($outputnextprevious) ? '<li class="'.$liempty.' '.$liclass.'">'.$nexttext.'</li>'.n : '';
+			$out[] = ($outputlastfirst) ?    '<li class="'.$liempty.' '.$liclass.'">'.$lasttext.'</li>'.n : '';
 			}
 		else
 			{
-			$out[] = ($outputnextprevious) ? "<li class='$liclass'><a href='?pg=".($pg+1)."$addToURL' title='".$nexttexttitle."'>".$nexttext.'</a></li>'.n : '';
-			$out[] = ($outputlastfirst) ? "<li class='$liclass'><a href='?pg=".$numberOfTabs."$addToURL' title='".$lasttexttitle."'>".$lasttext.'</a></li>'.n : '';
+			$out[] = ($outputnextprevious) ? '<li class="'.$liclass.'"><a href="?pg='.($pg+1).$addToURL.      '" title="'.$nexttexttitle.'">'.$nexttext.'</a></li>'.n : '';
+			$out[] = ($outputlastfirst)    ? '<li class="'.$liclass.'"><a href="?pg='.$numberOfTabs.$addToURL.'" title="'.$lasttexttitle.'">'.$lasttext.'</a></li>'.n : '';
 			}
 		return ($wraptag) ? tag('<ul'.$ulclass.$ulid.'>'.n.join('', $out).'</ul>',$wraptag) : '<ul'.$ulclass.$ulid.'>'.n.join('', $out).'</ul>';
 		}
