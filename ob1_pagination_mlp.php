@@ -53,7 +53,16 @@ function ob1_pagination($atts)
 		'mode'=>'full',
 	),$atts));
 
-	$url = ($mode === 'full') ? hu.ltrim($req,'/') : '';
+	$url = '';
+	if( $mode === 'full')
+		{
+		$url = hu.ltrim($req,'/');
+		$cn_qs  = strlen($qs);
+		if( $cn_qs > 0 )
+			$cn_qs += 1;
+		$cn_req = strlen($url);
+		$url = substr($url,0,$cn_req-$cn_qs);
+		}
 	if( defined('L10N_DEBUG_URLREWRITE') && L10N_DEBUG_URLREWRITE) dmp($url);
 	
 	$ulid=(empty($ulid)) ? '' : ' id="'.$ulid.'"';
@@ -112,8 +121,8 @@ function ob1_pagination($atts)
 		$out=array();
 		if($pg>1)
 			{
-			$out[] = ($outputlastfirst) ?    '<li class="'.$liclass.'"><a href="'.$url.'?pg=1'.       $addToURL.' title="'.$firsttexttitle.   '">'.$firsttext.   '</a></li>'.n : '';
-			$out[] = ($outputnextprevious) ? '<li class="'.$liclass.'"><a href="'.$url.'?pg='.($pg-1).$addToURL.' title="'.$previoustexttitle.'">'.$previoustext.'</a></li>'.n : '';
+			$out[] = ($outputlastfirst) ?    '<li class="'.$liclass.'"><a href="'.$url.'?pg=1'.       $addToURL.'" title="'.$firsttexttitle.   '">'.$firsttext.   '</a></li>'.n : '';
+			$out[] = ($outputnextprevious) ? '<li class="'.$liclass.'"><a href="'.$url.'?pg='.($pg-1).$addToURL.'" title="'.$previoustexttitle.'">'.$previoustext.'</a></li>'.n : '';
 			}
 		else
 			{
@@ -148,7 +157,7 @@ function ob1_pagination($atts)
 				}
 			else
 				{
-				$out[] = '<li class="'.$liclass.'"><a href="'.$url.'?pg='.$i.$addToURL.' title="'.$pagetext;
+				$out[] = '<li class="'.$liclass.'"><a href="'.$url.'?pg='.$i.$addToURL.'" title="'.$pagetext;
 				$out[] = ($reversenumberorder) ? ' '.($numberOfTabs-$i+1).'">'.($numberOfTabs-$i+1) : ' '.$i.'">'.$i;
 				$out[] = '</a></li>'.n;
 				}
