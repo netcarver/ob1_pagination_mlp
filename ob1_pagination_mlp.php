@@ -50,11 +50,11 @@ function ob1_pagination($atts)
 		'moretabsdisplay'=>'', # may contain before or after or both if they're comma-separated
 		'moretabstext'=>'...',
 		'wraptag'=>'',
-		'mode'=>'full',
+		'mode'=>'relative',	# make this 'full' to output non-relative URLs. The MLP pack version will automatically do this.
 	),$atts));
 
 	$url = '';
-	if( $mode === 'full')
+	if( defined('L10N_SNIPPET_IO_HEADER') || $mode === 'full')
 		{
 		$url = hu.ltrim($req,'/');
 		$cn_qs  = strlen($qs);
