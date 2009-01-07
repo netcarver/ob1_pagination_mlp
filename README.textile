@@ -2,10 +2,10 @@ h1. ob1_pagination_mlp
 
 h2. Description
 
-p. My modified version of the ob1_pagination plugin for 
+p. My modified version of the ob1_pagination plugin by Henrik Jönsson for 
 "Textpattern":http://textpattern.com.
 
 h2. Licence
 
-p. This project is released under the "GPLv2 licence":http://www.fsf.org/licensing/licenses/info/GPLv2.html.
+p. Released under the Creative Commons Attribution-Share Alike 3.0 Unported, http://creativecommons.org/licenses/by-sa/3.0/
 
