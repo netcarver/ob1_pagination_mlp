@@ -293,7 +293,7 @@ if (0) {
 <div id="helpContents">
 
 
-	<h1>ob1-pagination v2.5 [2007-10-13]</h1>
+	<h1>ob1-pagination v2.5mlp [2007-10-13]</h1>
 
 <div class="index">
 
@@ -324,6 +324,7 @@ if (0) {
 		<li><a href="#pluginMoreTabsDisplay">moretabsdisplay</a></li>
 		<li><a href="#pluginMoreTabsText">moretabstext</a></li>
 		<li><a href="#pluginWrapTag">wraptag</a></li>
+		<li><a href="#pluginMode">mode</a></li>
 	</ul></li>
 		<li><a href="#pluginExamples">Examples</a></li>
 		<li><a href="#pluginChangeLog">Changelog</a></li>
@@ -461,6 +462,10 @@ if (0) {
 	<h3 id="pluginWrapTag">wraptag</h3>
 
 	<p>No brainer. Does what it usually does in <acronym title="Textpattern"><span class="caps">TXP</span></acronym>. Wraps the tag specified around the output.</p>
+
+	<h3 id="pluginMode">mode</h3>
+
+	<p>Controls the kind of URLs output by the plugin. Defaults to 'relative' but any other value will cause the plugin to try to output full URLs. NB: When the MLP Pack is installed the plugin will try to output full URLs no matter what this attribute is set to.</p>
 
 	<h2 id="pluginExamples">Examples</h2>
 
