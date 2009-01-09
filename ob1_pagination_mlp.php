@@ -60,6 +60,17 @@ function ob1_pagination($atts)
 	$url = '';
 	if( defined('L10N_SNIPPET_IO_HEADER') || $mode === 'full')
 		{
+		# chh_keywords compatibility...
+		global $chh_keyquery;
+		if( isset($chh_keyquery['request_uri']) )
+			{
+			$cn_subpath = strlen($pfr);
+			if( defined('L10N_DEBUG_URLREWRITE') && L10N_DEBUG_URLREWRITE) dmp('$pfr = ['.htmlspecialchars($pfr).'] length='.$cn_subpath);
+			$full_req = $chh_keyquery['request_uri'];
+			$req = substr($full_req,$cn_subpath);
+			if( defined('L10N_DEBUG_URLREWRITE') && L10N_DEBUG_URLREWRITE) dmp('CHH_KEYWORDS req rewritten as ['.$req.']');
+			}
+
 		$url = hu.ltrim($req,'/');
 		$cn_qs  = strlen($qs);
 		if( $cn_qs > 0 )
