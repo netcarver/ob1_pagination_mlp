@@ -24,7 +24,11 @@ function ob1_pagination($atts)
 	if(!isset($pg)) $pg=1;
 	$numberOfTabs = (empty($thispage)) ? 1: $numPages;
 
-	if( defined('L10N_DEBUG_URLREWRITE') && L10N_DEBUG_URLREWRITE) dmp($pretext);
+	if( defined('L10N_DEBUG_URLREWRITE') && L10N_DEBUG_URLREWRITE) 
+		{
+		dmp('$pretext as seen by ob1_pagination_mlp...');
+		dmp($pretext);
+		}
 	
 	extract(lAtts(array(
 		'maximumtabs'=>'11', # maximum number of tabs displayed
